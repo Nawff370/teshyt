@@ -2,7 +2,7 @@
 
 
   function signInPage() {
-    window.location.href = "./navs/signin.php"
+    window.location.href = "./navs/signin.html"
   }
 
   function openNavForEditingProfile() {

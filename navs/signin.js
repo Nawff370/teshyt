@@ -19,7 +19,7 @@ function logInNow() {
 }
 
 function home() {
-  window.location.href = "../index.php" // to home
+  window.location.href = "../index.html" // to home
 }
 
 
@@ -468,7 +468,7 @@ function submitFormForLogin(e) {
             setTimeout(function() {
 
               document.getElementById("myNavForLogin").style.display = "none"
-              window.location.href = "../index.php" // to home
+              window.location.href = "../index.html" // to home
             }, 2000)
 
           }, 4000)
@@ -561,7 +561,7 @@ function submitFormForUid(e) {
             loginDetailsWritten=0
 
             document.getElementById("myNavForLogin").style.display = "none"
-            window.location.href = "../index.php" // to home
+            window.location.href = "../index.html" // to home
           }, 2000)
 
         })
