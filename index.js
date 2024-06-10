@@ -1,5 +1,6 @@
 
-  
+
+
   function signInPage() {
     window.location.href = "./navs/signin.php"
   }
@@ -67,10 +68,8 @@
   document.querySelector(".topnav a.split").style.display = "none"
   document.querySelector(".accountInfo").style.display = "none"
 
- 
-    document.querySelector(".goingThrough1").style.display = "inline"
-
-    document.getElementById("waitingScreen").style.display = "block"
+  document.querySelector(".goingThrough1").style.display = "inline"
+  document.getElementById("waitingScreen").style.display = "block"
 
 
   var database = firebase.database()
@@ -88,8 +87,6 @@
       setInterval(function() {
         chatPageLive()
       }, 250)
-
- 
 
   }
 
@@ -178,6 +175,10 @@
         document.querySelector(".createDmButton").style.display = "flex"
         document.querySelector(".container74385").style.display = "block"
         document.querySelector(".chatBox").style.display = "none"
+        document.querySelector(".chatPageView").style.paddingBottom = "250px"
+        document.querySelector(".chatPageView").style.paddingLeft = "15px"
+        document.querySelector(".chatPageView").style.paddingRight = "15px"
+        document.querySelector(".chatPageView").style.paddingTop = "15px"
     }
    }
 
@@ -484,13 +485,13 @@
                            var newForm = firebase.database().ref('users/' + nametag)
 
                            async function generateUID(email, password) {
-                            const encoder = new TextEncoder();
-                            const data = encoder.encode(email + password);
+                            const encoder = new TextEncoder()
+                            const data = encoder.encode(email + password)
                             
-                            const buffer = await crypto.subtle.digest('SHA-256', data);
+                            const buffer = await crypto.subtle.digest('SHA-256', data)
                             
                             const byteArray = Array.from(new Uint8Array(buffer));
-                            const hexString = byteArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+                            const hexString = byteArray.map(byte => byte.toString(16).padStart(2, '0')).join('')
                             
                             return hexString
                           }
@@ -541,7 +542,17 @@
       })
   }
 
-
+  function logout() {
+    const replacement = "3202"
+    const ipAddress = ipAddressLocation.split('.').join(replacement);
+    var realDatabase = database.ref('savedLocationData/' + ipAddress)
+      realDatabase.once('value', function(snapshot) {
+      if (snapshot.exists()) {
+        realDatabase.remove()
+        location.reload()
+      } else {}
+    })
+  }
 
 
   function closeNavForFullAccDetails() {
@@ -555,50 +566,6 @@
     document.querySelector(".overlayAccDetails").style.display = "block"
     
   }
-  
-
-  function wallpaperSelection() {
-
-    // id 1
-    var popularAnime = [
-       "https://4kwallpapers.com/images/walls/thumbs_3t/12504.png", // 1 // Luffy gear 5
-       "https://4kwallpapers.com/images/walls/thumbs_3t/12455.jpeg", // 2 // Black clover asta
-       "https://wallpapercave.com/wp/wp6437579.jpg", // 3 // Demon Slayer sunrise
-       "../image/itachi1.jpg", // 4 // Itachi with hat
-       "../image/sasuke1.jpg", // 5 // Sasuke moonlight
-       "../image/sasuke2.jpg", // 6 // Sasuke demon shidhori
-       "../image/luffy1.jpg", // 7 // Luffy with strawhat
-    ]
-
-    // id 2
-    var animeLanscapes = [
-      "https://images6.alphacoders.com/133/1330094.png", // 1 // Landscape blue sky
-    ]
-
-    // id 3
-    var animeFantasy = [
-      "https://images4.alphacoders.com/133/1332018.png", // 1 // Anime girl sunset
-      "https://images3.alphacoders.com/133/1331008.png", // 2 // Anime girl bedroom
-      "https://wallpapercave.com/wp/wp9005946.jpg", // 3 // Anime girl daylight
-    ]
-
-    var wallpaper = ""
-    if (theme=="1") {
-      var randomIndex = Math.floor(Math.random() * popularAnime.length)
-      wallpaper = popularAnime[randomIndex]
-    } else if (theme=="2") {
-      var randomIndex = Math.floor(Math.random() * animeLanscapes.length)
-      wallpaper = animeLanscapes[randomIndex]
-    } else if (theme=="3") {
-      var randomIndex = Math.floor(Math.random() * animeFantasy.length)
-      wallpaper = animeFantasy[randomIndex]
-    }
-    if (!wallpaper=="") {
-      document.querySelector("html").style.backgroundImage = `url(${wallpaper})`
-    }
-  }
-
-  wallpaperSelection()
 
   function homeButtonClick() {
     // Display section
@@ -900,7 +867,6 @@ if (daysAgo === 0) {
     const dmsContainer = document.getElementById('dmcontainer');
     const dmsRef = database.ref(`users/${accUsername}/chatData`);
     
-    // Listen for child added events
     dmsRef.on('child_added', (snapshot) => {
       if (snapshot.exists()) {
        const post = snapshot.val();
@@ -910,7 +876,6 @@ if (daysAgo === 0) {
       }
     });
     
-    // Function to create a DM element
     function createDmElement(avatar, username) {
       const dmElement = document.createElement('div');
       dmElement.classList.add('dmListContainer');
@@ -969,33 +934,35 @@ if (daysAgo === 0) {
 
              }
 
-            function refOnlineServe() {
-              var chatRef = database.ref("users/" + accUsername + "/chatData/" + name + "/content")
-              chatRef.on("child_added", function (snapshot) {
-                var messageData = snapshot.val();
-                var chatContainer = document.getElementById("chat-container4321")
-                var messageElement = document.createElement("div")
-                
-                if (messageData.byWho==accUsername) {
-                  messageElement.className = "rightChatMsgs"
-
-                } else if (messageData.byWho==name) {
-                  messageElement.className = "leftChatMsgs"
-
-                }
-
-                messageElement.innerHTML = messageData.text;
-                
-                chatContainer.appendChild(messageElement)
-              
-                // Scroll to the bottom of the chat container
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-              });
-            }
-
-            
            })
-          
+
+           function refOnlineServe() {
+            var chatRef = database.ref("users/" + accUsername + "/chatData/" + name + "/content")
+            chatRef.on("child_added", function (snapshot) {
+              var messageData = snapshot.val();
+              var chatContainer = document.getElementById("chat-container4321")
+              var messageElement = document.createElement("div")
+              var sent = 0
+              
+              if (messageData.byWho==accUsername) {
+                messageElement.className = "rightChatMsgs"
+
+              } else if (messageData.byWho==name) {
+                messageElement.className = "leftChatMsgs"
+
+              }
+
+              messageElement.innerHTML = messageData.text
+
+              if (sent == 0) {
+               chatContainer.appendChild(messageElement)
+               sent = 1
+              }
+
+              chatContainer.scrollTop = chatContainer.scrollHeight
+            })
+          }
+  
          })
         })
         
@@ -1034,12 +1001,32 @@ if (daysAgo === 0) {
     }
   }
 
-     
+  var chatInput = document.getElementById('textForUserToSend')
+
+  chatInput.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+
+      event.preventDefault()
+
+      var textInput = document.getElementById("textForUserToSend").value
+      var text = textInput.trim()
+
+      if (text == "") {} else {
+        sendMessageToUser()
+      }
+
+    }
+  })
+
+
   function chatboxOpen() {
     document.querySelector(".createDmButton").style.display = "none"
     document.querySelector(".container74385").style.display = "none"
     document.querySelector(".chatBox").style.display = "block"
-    document.querySelector(".chatPageView").style.paddingBottom = "15px"
+    document.querySelector(".chatPageView").style.paddingBottom = "0px"
+    document.querySelector(".chatPageView").style.paddingLeft = "0px"
+    document.querySelector(".chatPageView").style.paddingRight = "0px"
+    document.querySelector(".chatPageView").style.paddingTop = "0px"
   }
 
   function exitChatBox() {
@@ -1047,6 +1034,13 @@ if (daysAgo === 0) {
     document.querySelector(".container74385").style.display = "block"
     document.querySelector(".chatBox").style.display = "none"
     document.querySelector(".chatPageView").style.paddingBottom = "250px"
+    document.querySelector(".chatPageView").style.paddingLeft = "15px"
+    document.querySelector(".chatPageView").style.paddingRight = "15px"
+    document.querySelector(".chatPageView").style.paddingTop = "15px"
+
+    var textInput = document.getElementById("textForUserToSend").value
+    var text = textInput.trim()
+    text = ""
 
     var chatContainer = document.getElementById("chat-container4321")
     while (chatContainer.firstChild) {
@@ -1054,5 +1048,4 @@ if (daysAgo === 0) {
     }
   }
 
-  
   
