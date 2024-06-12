@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="./index.css">
         <script src="https://kit.fontawesome.com/548f053cec.js" crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="google-signin-client_id" content="819299772018-ou5b0ah9nap50kjo3d1g3c3k1no82d26.apps.googleusercontent.com">
         <link rel="icon" type="image/x-icon" href="./image/NOVILLIA.png">
     </head>
     <body>
@@ -134,7 +135,7 @@
           </section>
 
           <section class="chatPageView">
-            <div onclick="viewDmCreatingPopup()" class="createDmButton"><i class="fa-solid fa-plus"></i></div>
+            <div onclick="viewDmCreatingPopup()" class="createDmButton"><i class="fa-solid fa-plus" id="tapSpin1"></i></div>
             <div class="container74385">
               <div class="dmsContainer" id="dmcontainer">
                 <!-- dms -->
@@ -170,19 +171,16 @@
           <div class="createDMpopup">
             <a href="javascript:void(0)" class="closebtnDMpopup" onclick="closeDmCreatingPopup()">&times;</a>
             <div class="firstDiv284">
-              <h5>Name</h5>
-              <input id="nameFordm" type="text"></input>
-              <h4 class="alert4">> user dont exist</h4>
-              <h4 class="alert5">> already exists</h4>
-              <h4 class="alert6">> cant dm yourself</h4>
-              <div onclick="createDm()" class="createDm">
-                create Dm
+              
+              <div id="users-Container" class="classForUsersList">
+
               </div>
 
             </div>
           </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <script src="./index.js"></script>       
     </body>
 </html>

@@ -75,6 +75,8 @@ h2.main-heading::before {
 
 h2.main-heading:hover {
     color: #c22323;
+    text-shadow: 2px 2px 4px rgba(255, 0, 0, 0.521);
+
 }
 
 
@@ -916,6 +918,7 @@ h2.main-heading:hover {
   border-radius: 50%;
   cursor: pointer;
   float: right;
+  transition-duration: 0.5s;
 }
 
 .createDmButton i {
@@ -945,57 +948,73 @@ h2.main-heading:hover {
 }
 
 .createDMpopup .closebtnDMpopup:hover {
-  color: white;
+  color: rgb(0, 0, 0);
   scale: 1.1;
 }
 
-.firstDiv284 {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+
+
+.classForUsersList {
+  position: relative;
+  padding: 50px;
+  margin-top: 60px;
 }
 
-.createDMpopup h5 {
+.COL {
+  background-color: #f8f8f8;
+  border: 1px solid black;
+  position: relative;
+  padding-left: 15px;
+  padding-right: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 35px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.userCOL {
+  display: flex;
+}
+
+.msgToUserButton {
+  border-radius: 50%;
+  background-color: #027df0e8;
+  padding-left: 24px;
+  padding-right: 24px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  scale: 0.8;
+}
+
+.msgToUserButton:hover {
+  background-color: #2f7dc7e8;
+}
+
+.msgToUserButton i {
+  color: #ffffff;
+  text-align: center;
+  margin-top: 22px;
+  size: 100px;
+} 
+
+
+.avatarCOL {
+  background-image: url(./image/Untitled.png);
+  border-radius: 50%;
+  border: 1px solid rgb(0, 0, 0);
+  background-size: cover;
+  height: 60px;
+  width: 60px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.usernameCOL {
   color: rgb(0, 0, 0);
-  font-size: 18px;
-  text-align: center;
-}
-.createDMpopup input[type="text"] {
-  margin-top: 5px;
-  width: 250px;
-  padding: 5px;
-  background-color: white;
-  outline: none;
-  color: black;
-  border: 5px solid white;
-  border-radius: 20px;
-  margin-bottom: 4px;
-}
-
-.alert4 {
-  color: red;
-  font-size: 12px;
-  margin: 4px;
-  display: none;
-  
-}
-
-.alert5 {
-  margin: 4px;
-  color: red;
-  font-size: 12px;
-  display: none;
-}
-
-.alert6 {
-  margin: 4px;
-  color: red;
-  font-size: 12px;
-  display: none;
+  margin-left: 35px;
+  margin-top: 24px;
 }
 
 .createDm {
@@ -1034,8 +1053,13 @@ h2.main-heading:hover {
   display: flex;
   width: 100%;
   padding-right: 15px;
+  transition: background 0.4s ease;
   background-color: rgb(255, 255, 255);
   border: 0.1px solid black;
+}
+
+.dmList::before {
+  animation: ripple 0.8s linear;
 }
 
 .dmList:hover {

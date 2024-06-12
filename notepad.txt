@@ -48,3 +48,10 @@
                        } else {}
                       })
                     }
+
+
+
+                    style="background-image: url(${avatar});"
+                    ${username}
+
+                    onclick="createDm("${username}")"

@@ -6,11 +6,11 @@
   }
 
   function openNavForEditingProfile() {
-    document.getElementById("myNavForEditingProfile").style.display = "inline";
+    document.getElementById("myNavForEditingProfile").style.display = "inline"
   }
   
   function closeNavForEditingProfile() {
-    document.getElementById("myNavForEditingProfile").style.display = "none";
+    document.getElementById("myNavForEditingProfile").style.display = "none"
   }
 
   document.querySelector(".homePageView").style.display = "block"
@@ -100,8 +100,8 @@
 
       var formattedIP = data.ip
       ipAddressLocation = data.ip
-      const replacement = "3202"
-      const ipAddress = formattedIP.split('.').join(replacement);
+      const replacement = "43220022"
+      const ipAddress = formattedIP.split('.').join(replacement)
 
         var ipAddressRef = database.ref('savedLocationData/' + ipAddress)
         ipAddressRef.once('value', function(snapshot) {
@@ -145,7 +145,7 @@
               ipAddressSecretKey = ipAddress.split('.').join(replacement)
 
               dmAddFromDb()
-
+              homeButtonClick()
 
           } else {
 
@@ -200,7 +200,7 @@
      .then(data => {
 
       var formattedIP = data.ip
-      const replacement = "3202"
+      const replacement = "43220022"
       const ipAddress = formattedIP.split('.').join(replacement)
       var dontCheck = 0
 
@@ -245,7 +245,7 @@
                           reader.readAsDataURL(file)
 
                           reader.onload = readerEvent => {
-                          var content = readerEvent.target.result;    
+                          var content = readerEvent.target.result    
                           document.getElementById("waitingScreen").style.display = "block"              
 
                           var ipAddressRef = database.ref('savedLocationData/' + ipAddress)
@@ -404,7 +404,7 @@
 
                  }
 
-                 document.getElementById('profileEditForm').addEventListener('submit', submitChanges);
+                 document.getElementById('profileEditForm').addEventListener('submit', submitChanges)
 
                  function submitChanges(e) {
                   e.preventDefault()
@@ -444,13 +444,13 @@
                           var newForm = firebase.database().ref('users/' + nametag)
 
                           async function generateUID(email, password) {
-                           const encoder = new TextEncoder();
-                           const data = encoder.encode(email + password);
+                           const encoder = new TextEncoder()
+                           const data = encoder.encode(email + password)
                            
-                           const buffer = await crypto.subtle.digest('SHA-256', data);
+                           const buffer = await crypto.subtle.digest('SHA-256', data)
                            
-                           const byteArray = Array.from(new Uint8Array(buffer));
-                           const hexString = byteArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+                           const byteArray = Array.from(new Uint8Array(buffer))
+                           const hexString = byteArray.map(byte => byte.toString(16).padStart(2, '0')).join('')
                            
                            return hexString
                          }
@@ -490,7 +490,7 @@
                             
                             const buffer = await crypto.subtle.digest('SHA-256', data)
                             
-                            const byteArray = Array.from(new Uint8Array(buffer));
+                            const byteArray = Array.from(new Uint8Array(buffer))
                             const hexString = byteArray.map(byte => byte.toString(16).padStart(2, '0')).join('')
                             
                             return hexString
@@ -530,8 +530,6 @@
                   }
                  }
 
-
-
               })
 
           } else {
@@ -543,8 +541,8 @@
   }
 
   function logout() {
-    const replacement = "3202"
-    const ipAddress = ipAddressLocation.split('.').join(replacement);
+    const replacement = "43220022"
+    const ipAddress = ipAddressLocation.split('.').join(replacement)
     var realDatabase = database.ref('savedLocationData/' + ipAddress)
       realDatabase.once('value', function(snapshot) {
       if (snapshot.exists()) {
@@ -582,6 +580,7 @@
     element.classList.remove('active')
     var element = document.getElementById('chatPageId')
     element.classList.remove('active')
+
   }
 
   function postButtonClick() {
@@ -606,6 +605,7 @@
       document.querySelector(".loginToUse").style.display = "block"
 
     }
+
   }
 
   function chatButtonClick() {
@@ -629,6 +629,7 @@
       document.querySelector(".chatPageView").style.display = "none"
       document.querySelector(".loginToUse").style.display = "block"
     }
+
   }
 
 
@@ -641,7 +642,7 @@ var postsContainer = document.getElementById('posts-container')
 function addPost() {
   const button = document.querySelector(".post-form button")
 
-   const postText = postInput.value;
+   const postText = postInput.value
    if (postText) {
     const newPostRef = postsRef.push()
     newPostRef.set({
@@ -649,7 +650,7 @@ function addPost() {
        timestamp: new Date().getTime(),
        avatar: avatarUrl,
        username: accUsername
-    });
+    })
      postInput.value = ''
    }
 }
@@ -700,13 +701,14 @@ if (daysAgo === 0) {
   }) 
 
   function createPostElement(text, timestamp, avatar, username) {
-   const postElement = document.createElement('div');
-   postElement.classList.add('containerForSinglePost'); // Use 'classList.add' to add a class.
+   const postElement = document.createElement('div')
+   postElement.classList.add('containerForSinglePost')
+   
 
    postElement.innerHTML = `
    <div class="postPT">
     <header>
-    <div class="avatar" style="background-image: url(${avatar});"></div>
+    <div class="avatar" style="background-image: url(${avatar})"></div>
     <h5 class="username">${username}</h5>
     </header>
     <p class="post-text">${text}</p>
@@ -716,17 +718,24 @@ if (daysAgo === 0) {
      </section>
    `
 
-   return postElement;
+   return postElement
    }
 
 
 
     function viewDmCreatingPopup() {
       document.querySelector(".createDMpopup").style.display = "block"
+      loadAllUsersList()
+      document.getElementById("tapSpin1").classList.add("fa-spin")
     }
 
     function closeDmCreatingPopup() {
       document.querySelector(".createDMpopup").style.display = "none"
+      var removeAll = document.querySelectorAll(".COL")
+      removeAll.forEach(function(child) {
+        child.remove()
+      })
+      document.getElementById("tapSpin1").classList.remove("fa-spin")
     }
 
     function chatPageLive() {
@@ -737,7 +746,7 @@ if (daysAgo === 0) {
           document.querySelector(".alert6").style.display = "block"
         } else {
           document.querySelector(".alert6").style.display = "none"
-          var userRef = database.ref('users/' + name);
+          var userRef = database.ref('users/' + name)
     
           userRef.once('value', function(snapshot) {
             if (snapshot.exists()) {
@@ -780,37 +789,69 @@ if (daysAgo === 0) {
      
     }
 
-    function createDm() {
-      var name = document.getElementById("nameFordm").value;
+    function loadAllUsersList() {
+
+      var realDatabase = database.ref('users/')
+      realDatabase.once('value', function(snapshot) {
+        if (snapshot.exists()) {
+
+        snapshot.forEach(function(userSnapshot) {
+          var userData = userSnapshot.val()
+
+          var userName = userData.name
+          var userProfile = userData.profile
+
+          var usersContainer = document.getElementById('users-Container')
+    
+          if (userName == accUsername) {} else {
+            const usersElement = createUsersList(userName, userProfile)
+            usersContainer.prepend(usersElement)
+          }
+
+        })
+
+        } else {}
+      })
+
+    }
+
+    function createUsersList(username, avatar) {
+      const usersElement = document.createElement('div')
+      usersElement.classList.add('COL')
+      
+      
+      usersElement.innerHTML = `
+      <div class="userCOL">
+         <div class="avatarCOL" style="background-image: url(${avatar})"></div>
+         <h5 class="usernameCOL">${username}</h5>
+         <div onclick="createDm('${username}')" class="msgToUserButton"><i class="fa-solid fa-plus"></i></div>
+      </div>
+      `
+      
+   
+      return usersElement
+      }
+
+    function createDm(i) {
+
       var database = firebase.database()
-    
-      if (name !== "") {
-        if (name === accUsername) {
-          document.querySelector(".alert6").style.display = "block"
-        } else {
-          document.querySelector(".alert6").style.display = "none"
-          var userRef = database.ref('users/' + name);
-    
-          userRef.once('value', function(snapshot) {
-            if (snapshot.exists()) {
-              document.querySelector(".alert4").style.display = "none"
-              var accExists = "1"
-            } else {
-              document.querySelector(".alert4").style.display = "block"
-              var accExists = "0"
-            }
+      var name = i
     
             var userChatRef = database.ref('users/' + accUsername + "/chatData/" + name)
             userChatRef.once('value', function(snap) {
               if (snap.exists()) {
-                document.querySelector(".alert5").style.display = "block"
                 var accExistsInChat = "1"
+                document.querySelector(".createDMpopup").style.display = "none"
+                document.getElementById("tapSpin1").classList.remove("fa-spin")
+                var removeAll = document.querySelectorAll(".COL")
+                  removeAll.forEach(function(child) {
+                   child.remove()
+                  })
               } else {
-                document.querySelector(".alert5").style.display = "none"
                 var accExistsInChat = "0"
               }
 
-              if (accExists === "1" && accExistsInChat === "0") {
+              if (accExistsInChat === "0") {
 
                 var userRef = database.ref('users/' + name)
                 userRef.once('value', function(snap) {
@@ -848,44 +889,46 @@ if (daysAgo === 0) {
                     set: "yes"
                   })
 
+                  document.querySelector(".createDMpopup").style.display = "none"
+                  document.getElementById("tapSpin1").classList.remove("fa-spin")
+                  var removeAll = document.querySelectorAll(".COL")
+                  removeAll.forEach(function(child) {
+                   child.remove()
+                  })
 
                   
                 })
     
               }
             })
-          })
-        }
-      } else {
-        document.querySelector(".alert4").style.display = "none"
-        document.querySelector(".alert5").style.display = "none"
-        document.querySelector(".alert6").style.display = "none"
-      }
-    }
+          }
+        
+
+    
     
   function dmAddFromDb() {
-    const dmsContainer = document.getElementById('dmcontainer');
-    const dmsRef = database.ref(`users/${accUsername}/chatData`);
+    const dmsContainer = document.getElementById('dmcontainer')
+    const dmsRef = database.ref(`users/${accUsername}/chatData`)
     
     dmsRef.on('child_added', (snapshot) => {
       if (snapshot.exists()) {
-       const post = snapshot.val();
-       const dmElement = createDmElement(post.profile, post.name);
-       dmsContainer.prepend(dmElement);
+       const post = snapshot.val()
+       const dmElement = createDmElement(post.profile, post.name)
+       dmsContainer.prepend(dmElement)
       } else {
       }
-    });
+    })
     
     function createDmElement(avatar, username) {
-      const dmElement = document.createElement('div');
-      dmElement.classList.add('dmListContainer');
+      const dmElement = document.createElement('div')
+      dmElement.classList.add('dmListContainer')
     
       dmElement.innerHTML = `
       <div class="dmList">
-        <div class="dmAvatar" style="background-image: url(${avatar});"></div>
+        <div class="dmAvatar" style="background-image: url(${avatar})"></div>
         <p>${username}</p>
       </div>
-      `;
+      `
 
       dmElement.querySelector('.dmList').addEventListener('click', function () {
         const pElement = this.querySelector('p')
@@ -939,7 +982,7 @@ if (daysAgo === 0) {
            function refOnlineServe() {
             var chatRef = database.ref("users/" + accUsername + "/chatData/" + name + "/content")
             chatRef.on("child_added", function (snapshot) {
-              var messageData = snapshot.val();
+              var messageData = snapshot.val()
               var chatContainer = document.getElementById("chat-container4321")
               var messageElement = document.createElement("div")
               var sent = 0
@@ -1039,8 +1082,8 @@ if (daysAgo === 0) {
     document.querySelector(".chatPageView").style.paddingTop = "15px"
 
     var textInput = document.getElementById("textForUserToSend").value
-    var text = textInput.trim()
-    text = ""
+    var text55 = textInput.trim()
+    text55 = ""
 
     var chatContainer = document.getElementById("chat-container4321")
     while (chatContainer.firstChild) {
