@@ -1,27 +1,30 @@
 document.querySelector(".topnav a.split").style.display = "none"
 
 function signInNow() {
-  document.querySelector(".logInTabShow").style.display = "none";
-  document.querySelector(".signInTabShow").style.display = "block";
-  document.querySelector(".tablink1").style.color = "black";
-  document.querySelector(".tablink1").style.backgroundColor = "#f2f2f2";
-  document.querySelector(".tablink2").style.color = "white";
-  document.querySelector(".tablink2").style.backgroundColor = "rgb(174, 44, 214)";
+  document.querySelector(".logInTabShow").style.display = "none"
+  document.querySelector(".signInTabShow").style.display = "block"
+  document.querySelector(".tablink1").style.color = "black"
+  document.querySelector(".tablink1").style.backgroundColor = "#f2f2f2"
+  document.querySelector(".tablink2").style.color = "white"
+  document.querySelector(".tablink2").style.backgroundColor = "rgb(174, 44, 214)"
 }
 
 function logInNow() {
-  document.querySelector(".signInTabShow").style.display = "none";
-  document.querySelector(".logInTabShow").style.display = "block";
-  document.querySelector(".tablink1").style.color = "white";
-  document.querySelector(".tablink1").style.backgroundColor = "rgb(174, 44, 214)";
-  document.querySelector(".tablink2").style.color = "black";
-  document.querySelector(".tablink2").style.backgroundColor = "#f2f2f2";
+  document.querySelector(".signInTabShow").style.display = "none"
+  document.querySelector(".logInTabShow").style.display = "block"
+  document.querySelector(".tablink1").style.color = "white"
+  document.querySelector(".tablink1").style.backgroundColor = "rgb(174, 44, 214)"
+  document.querySelector(".tablink2").style.color = "black"
+  document.querySelector(".tablink2").style.backgroundColor = "#f2f2f2"
 }
 
 function home() {
   window.location.href = "../index.html" // to home
 }
 
+function onSignIn() {
+  alert('hi')
+}
 
 const firebaseConfig = {
 
@@ -302,16 +305,16 @@ function submitSignIn(e) {
             var currentdate = new Date()
             var date = currentdate.toLocaleString()
 
-            var dateOfCreation = date.replace(/\//g, 'NN').replace(/:/g, 'CC').replace(/,/g, '');
+            var dateOfCreation = date.replace(/\//g, 'NN').replace(/:/g, 'CC').replace(/,/g, '')
             
             async function generateUID(email, password) {
-              const encoder = new TextEncoder();
-              const data = encoder.encode(email + password);
+              const encoder = new TextEncoder()
+              const data = encoder.encode(email + password)
               
-              const buffer = await crypto.subtle.digest('SHA-256', data);
+              const buffer = await crypto.subtle.digest('SHA-256', data)
               
-              const byteArray = Array.from(new Uint8Array(buffer));
-              const hexString = byteArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+              const byteArray = Array.from(new Uint8Array(buffer))
+              const hexString = byteArray.map(byte => byte.toString(16).padStart(2, '0')).join('')
               
               return hexString
             }
@@ -334,7 +337,7 @@ function submitSignIn(e) {
 
             
             // open nav
-            document.getElementById("myNavForSignIn").style.display = "block";
+            document.getElementById("myNavForSignIn").style.display = "block"
 
             document.getElementById('name').value = ""
             document.getElementById('email').value = ""
@@ -349,7 +352,7 @@ function submitSignIn(e) {
 
               setTimeout(function() {
                 // close nav
-                document.getElementById("myNavForSignIn").style.display = "none";
+                document.getElementById("myNavForSignIn").style.display = "none"
                 
               }, 2000)
   
@@ -379,7 +382,7 @@ const createNewAccount = (nameOfUser, email, pass, uid, doc) => {
 }
 
 // Handle the login form submit
-document.getElementById('logInForm').addEventListener('submit', submitFormForLogin);
+document.getElementById('logInForm').addEventListener('submit', submitFormForLogin)
 
 function loginMain() {
 
@@ -441,7 +444,7 @@ function submitFormForLogin(e) {
 
           // Formatting ip
           const formattedIP = data.ip
-          const replacement = "3202"
+          const replacement = "43220022"
           const ipAddress = formattedIP.split('.').join(replacement)
          
           var newIpForm = firebase.database().ref('savedLocationData/' + ipAddress)
@@ -476,7 +479,7 @@ function submitFormForLogin(e) {
         })
 
         .catch(error => {
-          console.error(error);
+          console.error(error)
         })
 
         } else {
@@ -492,7 +495,7 @@ function submitFormForLogin(e) {
 
 
   
-document.getElementById('uidLoginForm').addEventListener('submit', submitFormForUid);
+document.getElementById('uidLoginForm').addEventListener('submit', submitFormForUid)
 
 
 function submitFormForUid(e) {
@@ -538,7 +541,7 @@ function submitFormForUid(e) {
 
           // Formatting ip
           const formattedIP = data.ip
-          const replacement = "3202"
+          const replacement = "43220022"
           const ipAddress = formattedIP.split('.').join(replacement)
          
           var newIpForm = firebase.database().ref('savedLocationData/' + ipAddress)
@@ -567,7 +570,7 @@ function submitFormForUid(e) {
         })
 
         .catch(error => {
-          console.error(error);
+          console.error(error)
         })
           
         } else {

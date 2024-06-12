@@ -1,9 +1,10 @@
 <html>
     <head>
         <link rel="stylesheet" href="./signin.css">
-        <title>Sign up - novilia</title>
+        <title>Sign up - novillia</title>
         <script src="https://kit.fontawesome.com/548f053cec.js" crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1"/> 
+        <meta name="google-signin-client_id" content="819299772018-ou5b0ah9nap50kjo3d1g3c3k1no82d26.apps.googleusercontent.com">
         <link rel="icon" type="image/x-icon" href="./image/NOVILLIA.png">
     </head>
 
@@ -12,7 +13,7 @@
         <div class="main-heading-back">
 
             <h2 class="main-heading">
-                Novilia
+                Novillia
             </h2>
 
             <div class="topnav"> 
@@ -155,6 +156,9 @@
                 <div><h4 class="alert9">> Invalid Uid</h4></div>
                 <button class="submitButtonForloginWithUid" type="submit">Advance</button>
 
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+
             </form>
         </div>
 
@@ -163,6 +167,7 @@
 
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <script src="./signin.js"></script>
     </body>
 </html>
