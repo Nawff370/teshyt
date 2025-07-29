@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+:root {
+  --primary-color: #29caa7;
+  --primary-hover: #1db393;
+  --text-dark: #2d353a;
+  --text-light: #6c757d;
+  --white: #ffffff;
+  --bg-light: #f8f9fa;
+  --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+
+body {
+    margin: 0;
+    background-size: cover;
+}
+
+/** the top part of home page **/
+
+.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    /**background: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgb(247, 247, 247) 100%); **/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /**backdrop-filter: blur(1px); **/
+}
+
+.top-logo {
+    width:100px;
+    height: 60px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: none;
+}
+
+.top-logo {
+    cursor: pointer;
+}
+
+.top-header-section {
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.top-header-section a {
+    text-decoration: none;
+    margin: 20px;
+    font-family: 'Rosalin Marige';
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgb(45, 53, 58);
+    transition: color 0.5s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.top-header-section a:hover {
+    color: rgb(90, 182, 151);
+    
+}
+
+
+.top-header-buttonsection {
+  margin-left: 2rem;
+}
+
+.top-bookbutton {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(41, 202, 167, 0.3);
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.top-bookbutton:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(41, 202, 167, 0.4);
+}
+
+.top-bookbutton:active {
+  transform: translateY(0);
+}
+
+.top-bookbutton i {
+  transition: var(--transition);
+}
+
+.top-bookbutton:hover i {
+  transform: translateX(3px);
+}
+
+.top-bookbuttonclicked {
+  transform: scale(0.95);
+}
+
+/** top menu when window is small **/
+
+.displaynone {
+    display: none;
+}
+
+.displayblock {
+    display: block;
+}
+
+.top-section-menu {
+    
+    padding-right: 30px;
+    float: right;
+}
+
+.buttonsformenu {
+    display: inline-block;
+    color: rgb(0, 89, 255);
+    border: none;
+    background-color: rgba(255, 228, 196, 0.425);
+    padding: 8px 11px 8px 11px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 0.2s ease-in;
+    display: none;
+}
+
+.buttonsformenu:hover {
+    background-color: rgba(255, 228, 196, 0.514);
+
+}
+
+.menuforsmallwindow {
+    width: 100%;
+    height: 260px;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    top: 10;
+    left: 0;
+    z-index: 998;
+    flex-direction: column;
+    text-align: center;
+    animation: slideDown 0.4s ease-out forwards;
+    display: none;
+}
+
+.menuforsmallwindow a{
+    color: rgba(0, 0, 0, 0.514);
+    text-decoration: none;
+    font-size: 20px;
+    margin-top: 18px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.menuforsmallwindow a:hover {
+    color: rgb(0, 0, 0);
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 1;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+}
+
+
+@media (max-width: 767px) {
+    
+}
+
+@media (max-width: 1036px) {
+    .buttonsformenu {
+        display: block;
+    }
+
+    .top-header-section {
+      display: none;
+    }
+
+    .top-header-buttonsection {
+        display: none;
+    }
+
+    .top {
+        justify-content: flex;
+    }
+
+    .top-logo {
+        margin-left: 20px; 
+        margin-right: 50%;
+    }
+
+    .top-headingcontent {
+        display: block;
+    }
+
+    .menuforsmallwindow {
+        display: none;
+    }
+}

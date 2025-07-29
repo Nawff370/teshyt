@@ -1,0 +1,149 @@
+<section class="wavesection">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+        <div class="wave wave4"></div>
+    </section>
+
+    .wavesection {
+    position: relative;
+    width: 100%;
+    height: 500px;
+
+    padding-bottom: 200px;
+
+
+
+    overflow: hidden;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100px;
+    background: url(imgs/wave.png);
+    background-size: 1000px 100px;
+}
+
+.wavesection .wave.wave1 {
+    animation: waveanimate 30s linear infinite;
+    z-index: 1000;
+    opacity: 0.2;
+    animation-delay: 0;
+    bottom: 0;
+}
+
+.wavesection .wave.wave2 {
+    animation: waveanimate2 15s linear infinite;
+    z-index: 999;
+    opacity: 0.5;
+    animation-delay: -5s;
+    bottom: 10px;
+}
+
+.wavesection .wave.wave3 {
+    animation: waveanimate2 15s linear infinite;
+    z-index: 998;
+    opacity: 0.2;
+    animation-delay: -2s;
+    bottom: 15;
+}
+
+.wavesection .wave.wave4 {
+    animation: waveanimate2 15s linear infinite;
+    z-index: 998;
+    opacity: 0.2;
+    animation-delay: -2s;
+    bottom: 15;
+}
+
+.wavesection .wave.wave5 {
+    animation: waveanimate2 15s linear infinite;
+    z-index: 997;
+    opacity: 0.2;
+    animation-delay: -2s;
+    bottom: 20px;
+}
+
+@keyframes waveanimate {
+    0% {
+        background-position-x: 0;
+    }
+
+    100% {
+        background-position-x: 1000px;
+    }
+}
+
+@keyframes waveanimate2 {
+    0% {
+        background-position-x: 0;
+    }
+
+    100% {
+        background-position-x: -1000px;
+    }
+}
+
+
+
+
+
+.buttonsformenu {
+  display: none; /* Hidden by default */
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: var(--transition);
+  z-index: 999;
+}
+
+.buttonsformenu:hover {
+  color: var(--primary-hover);
+  transform: rotate(90deg);
+}
+
+.menuforsmallwindow {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 80px);
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  z-index: 998;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 0.4s ease-out;
+  pointer-events: none;
+}
+
+.menuforsmallwindow.active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.menuforsmallwindow a {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: var(--transition);
+}
+
+.menuforsmallwindow a:hover {
+  color: var(--primary-color);
+  transform: scale(1.05);
+}

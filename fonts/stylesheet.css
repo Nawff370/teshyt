@@ -1,0 +1,73 @@
+@font-face {
+    font-family: 'Austina';
+    src: url('Austina.woff2') format('woff2'),
+        url('Austina.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fresh Honey';
+    src: url('FreshHoneyRegular.woff2') format('woff2'),
+        url('FreshHoneyRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pelvisthemorko';
+    src: url('Pelvisthemorko.woff2') format('woff2'),
+        url('Pelvisthemorko.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Grumbear';
+    src: url('Grumbear.woff2') format('woff2'),
+        url('Grumbear.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MythBusters';
+    src: url('MythBusters.woff2') format('woff2'),
+        url('MythBusters.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+@font-face {
+    font-family: 'Anecor Gheroos';
+    src: url('AnecorGheroos.woff2') format('woff2'),
+        url('AnecorGheroos.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Crogue';
+    src: url('Crogue.woff2') format('woff2'),
+        url('Crogue.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Rosalin Marige';
+    src: url('RosalinMarige-Regular.woff2') format('woff2'),
+        url('RosalinMarige-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

@@ -1,0 +1,111 @@
+
+
+<!-- resorts collection page -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../fonts/stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="resorts.css">
+    <link rel="stylesheet" href="../similar.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyline Maldives</title>
+    <link rel="icon" type="image/x-icon" href="../imgs/logo2-crop.png">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body oncontextmenu="return false;">
+    <!-- top part -->
+    <header class="top">
+        <!-- top part shi here -->
+        <img class="top-logo" src="../imgs/orl.png" alt="">
+        <section class="top-header-section">
+            <a href="../">Home</a>
+            <a style="color: rgb(90, 182, 151);" href="">Resorts</a>
+            <a href="">Exclusive Packages</a>
+            <a href="">About</a>
+            <a href="">Reach Us</a>
+        </section>
+        <section class="top-header-buttonsection">
+            <button id="booknowbutton" class="top-bookbutton">Book Now ></button>
+        </section>  
+        <section class="top-section-menu">
+            <button id="menuopenorclose" class="buttonsformenu fa-solid fa-bars" onclick="topmenufunc()"></button>
+            
+        </section>     
+        
+    </header>
+    <section id="idmenuforsmallwindow" class="menuforsmallwindow">
+        <a href="../index.html">Home</a>
+        <a style="color: rgb(90, 182, 151);" href="">Resorts</a>
+        <a href="">Exclusive Packages</a>
+        <a href="">About</a>
+        <a href="">Reach Us</a>
+    </section>
+
+    <section class="resorts-back-first">
+      <div class="resort-filter-container">
+            <h1>Find Your Perfect Resort</h1>   
+        
+        <div class="filter-section">
+            <div class="filter-group">
+                <label for="resort-category">Resort Category</label>
+                <select id="resort-category">
+                    <option value="all">All Categories</option>
+                    <option value="5+">5+ Star Resorts</option>
+                    <option value="5">5 Star Resorts</option>
+                    <option value="4">4 Star Resorts</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="transport">Transport</label>
+                <select id="transport">
+                    <option value="all">All Transports</option>
+                    <option value="speedboat">Speedboat</option>
+                    <option value="seaplane">Seaplane</option>
+                    <option value="both">Both</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="atoll">Atoll</label>
+                <select id="atoll">
+                    <option value="all">All Atolls</option>
+                    <option value="north male">North Male Atoll</option>
+                    <option value="south male">South Male Atoll</option>
+                    <option value="ari">Ari Atoll</option>
+                    <option value="baa">Baa Atoll</option>
+                    <option value="lhaviyani">Lhaviyani Atoll</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="travel-interest">Travel Interest</label>
+                <select id="travel-interest">
+                    <option value="all">All Interests</option>
+                    <option value="diving">Diving & Snorkeling</option>
+                    <option value="family">Family Resort</option>
+                    <option value="honeymoon">Honeymoon</option>
+                    <option value="spa">Spa & Wellness</option>
+                </select>
+            </div>
+            
+            <button id="apply-filters" class="filter-button">Search</button>
+        </div>
+        
+        <div id="resort-results" class="resort-results">
+            <!-- Resort cards shi -->
+        </div>
+      </div>
+    </section>
+
+</body>
+
+<script src="resorts.js"></script>
+<script src="../similar.js"></script>
+
+</html>
