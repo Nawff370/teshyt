@@ -189,11 +189,19 @@ body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    background-color: none;
+    outline: none;
 }
 
 .menuforsmallwindow a:hover {
     color: rgb(0, 0, 0);
 }
+
+.menuforsmallwindow a:active, .menuforsmallwindow a.active {
+  background-color: none;
+  outline: none;
+}
+
 
 @keyframes slideDown {
   0% {
