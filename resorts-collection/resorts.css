@@ -11,35 +11,25 @@
 
 body {
     position: relative;
-    height: 1000px;
-  
+    height: max-content;
+    z-index: 1;
     background: 
         /* White fade gradient (fixed to bottom) */
         linear-gradient(
             to bottom, 
             rgba(255,255,255,0) 60%, 
-            rgba(255,255,255,1) 100%
+            rgb(103, 172, 252) 100%
         ),
         /* Background image with identical sizing */
-        url('../imgs/resorts-back.jpg') center/cover no-repeat;
+        url('../imgs/reee.jpg');
+        background-repeat: no-repeat;
+        background-position: top;
+        background-size: cover;
     
 
 }
 
-.resorts-back-first::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 20%;
-    background: linear-gradient(
-        to bottom, 
-        rgba(255,255,255,0), 
-        rgba(255,255,255,1)
-    );
-    z-index: 1;
-}
+
 
 
 
@@ -51,12 +41,14 @@ body {
     margin-right: auto;
     padding: 0 20px;
     color: var(--white);
-    padding-bottom: 100px;
+    padding-bottom: 300px;
+    z-index: 10001;
 }
 
 
 .resort-filter-container h1 {
-    padding-top: 40px;
+    padding-top: 140px;
+    padding-bottom: 60px;
     font-family: 'Poppins', sans-serif;
     font-size: 2.5rem;
     margin-bottom: 30px;
