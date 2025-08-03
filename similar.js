@@ -1,37 +1,41 @@
 
 
-const BookButton = document.getElementById('booknowbutton')
-BookButton.addEventListener('click', function() {
-    BookButton.classList.add('top-bookbuttonclicked')
-})
+const openorclosebtntop = document.getElementById('menuopenorclose');
+const themenuofsmall = document.getElementById('idmenuforsmallwindow');
 
+let isMenuOpen = false;
 
-
-const openorclosebtntop = document.getElementById('menuopenorclose')
-
-const themenuofsmall = document.getElementById('idmenuforsmallwindow')
 function topmenufunc() {
-    // Get the real computed display value
-    const chh = window.getComputedStyle(themenuofsmall).display;
+  if (!isMenuOpen) {
+    themenuofsmall.classList.remove('slide-up');
+    themenuofsmall.style.display = 'flex';
+    themenuofsmall.classList.add('slide-down');
+    openorclosebtntop.classList.remove('fa-bars');
+    openorclosebtntop.classList.add('fa-xmark');
+    isMenuOpen = true;
+  } else {
+    themenuofsmall.classList.remove('slide-down');
+    themenuofsmall.classList.add('slide-up');
+    openorclosebtntop.classList.remove('fa-xmark');
+    openorclosebtntop.classList.add('fa-bars');
 
-    if (chh === 'none') {
-        openorclosebtntop.classList.remove("fa-bars");
-        openorclosebtntop.classList.add("fa-xmark");
-        themenuofsmall.style.display = "flex";
-    } else {
-        openorclosebtntop.classList.remove("fa-xmark");
-        openorclosebtntop.classList.add("fa-bars");
-        themenuofsmall.style.display = "none";
-    }
+    setTimeout(() => {
+      themenuofsmall.style.display = 'none';
+    }, 500); // match animation duration
+    isMenuOpen = false;
+  }
 }
 
 function checkWindowSize() {
-      const myDiv = document.getElementById('idmenuforsmallwindow')
-      if (window.innerWidth > 1035) {
-        openorclosebtntop.classList.remove("fa-xmark");
-        openorclosebtntop.classList.add("fa-bars");
-        myDiv.style.display = 'none'
-      }
-    }
+  if (window.innerWidth > 1035) {
+    themenuofsmall.classList.remove('slide-down', 'slide-up');
+    themenuofsmall.style.display = 'none';
+    openorclosebtntop.classList.remove('fa-xmark');
+    openorclosebtntop.classList.add('fa-bars');
+    isMenuOpen = false;
+  }
+}
 
-    window.addEventListener('resize', checkWindowSize)
+window.addEventListener('resize', checkWindowSize);
+
+

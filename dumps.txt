@@ -147,3 +147,74 @@
   color: var(--primary-color);
   transform: scale(1.05);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+        name: "The Ritz-Carlton Maldives, Fari Islands",
+        atoll: "North Male Atoll",
+        category: "5+",
+        transport: "both",
+        interests: ["honeymoon", "spa"],
+        image: "https://maldives-magazine.com/pictures/milaidhoo.jpg"
+    },
+    {
+        name: "Milaidhoo Island Maldives",
+        atoll: "Baa Atoll",
+        category: "5",
+        transport: "seaplane",
+        interests: ["diving", "honeymoon"],
+        image: "https://maldives-magazine.com/pictures/milaidhoo.jpg"
+    },
+    {
+        name: "Conrad Maldives Rangali Island",
+        atoll: "South Male Atoll",
+        category: "5",
+        transport: "seaplane",
+        interests: ["family", "spa"],
+        image: "https://maldives-magazine.com/pictures/milaidhoo.jpg"
+    },
+    {
+        name: "Four Seasons Resort Maldives at Landaa Giraavaru",
+        atoll: "Baa Atoll",
+        category: "5+",
+        transport: "seaplane",
+        interests: ["diving", "spa"],
+        image: "https://maldives-magazine.com/pictures/milaidhoo.jpg"
+    },
+    {
+        name: "Kuredu Island Resort & Spa",
+        atoll: "Lhaviyani Atoll",
+        category: "4",
+        transport: "speedboat",
+        interests: ["family", "diving"],
+        image: "https://maldives-magazine.com/pictures/milaidhoo.jpg"
+    },
+    {
+        name: "Baros Maldives",
+        atoll: "North Male Atoll",
+        category: "5",
+        transport: "speedboat",
+        interests: ["honeymoon", "spa"],
+        image: "https://maldives-magazine.com/pictures/milaidhoo.jpg"
+    }

@@ -5,7 +5,6 @@
   width: 100%;
   height: 580px;
   overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
   perspective: 1000px;
   transform: translateZ(0); /* Hardware acceleration */
 }
@@ -26,14 +25,17 @@
   opacity: 1;
   z-index: 10;
   filter: brightness(1);
-  animation: slowZoom 15s ease-in-out forwards;
+  animation: slowZoom 20s ease-in-out forwards;
+  animation: slowZoom 20s ease-in-out backwards;
 }
 
 /* Enhanced Zoom Animation */
 @keyframes slowZoom {
   0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1.1); }
+  20% { transform: scale(1.04); }
+  40% { transform: scale(1.05); }
+  60% { transform: scale(0.8); }
+  100% { transform: scale(1); }
 }
 
 /* When slide is being replaced */
@@ -150,7 +152,7 @@
 
 @keyframes slowZoom {
   0% { transform: scale(1); }
-  100% { transform: scale(1.05); }
+  100% { transform: scale(1.4); }
 }
 
 /* Responsive Adjustments */
@@ -211,3 +213,69 @@
   background-color: rgba(255, 255, 255, 0.8);
 }
 
+.main-sub-headings {
+  width: 100%;
+  margin-top: 90px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-align: center;
+  font-size: 50px;
+  font-family: 'Grumbear', sans-serif;
+  background: linear-gradient(to bottom, #52d4ab, #c6dfdc);
+}
+
+.maldives-services-images {
+  display: flex;
+  justify-content: center;   /* centers horizontally */
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.simage {
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 300px;
+  height: 300px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  color: rgba(254, 254, 254, 0.995);
+  transition: scale 0.3s ease-in-out;
+  font-family: 'MythBusters', sans-serif;
+}
+
+.simage:hover {
+  scale: 1.05;
+  cursor: pointer;
+}
+
+.text-overlay-image {
+  width: 270px;
+  height: 270px;
+  padding: 15px;
+  color: black;
+  background-color: rgba(246, 246, 246, 0.466);
+  position: absolute;
+  opacity: 0;
+  transition: opacity ease-in-out 0.5s;
+  backdrop-filter: blur(5px);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-family: 'Fresh Honey', sans-serif;
+}
+.text-overlay-image:hover {
+  opacity: 1;
+}
+
+.bg-ov-img {
+  position: relative;
+  display: flex;
+  justify-content: center;   /* centers horizontally */
+  align-items: center;
+  flex-wrap: wrap;
+}

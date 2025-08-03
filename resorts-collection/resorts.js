@@ -1,77 +1,24 @@
-// Resort data
-const resorts = [
-    {
-        name: "The Ritz-Carlton Maldives, Fari Islands",
-        atoll: "North Male Atoll",
-        category: "5+",
-        transport: "both",
-        interests: ["honeymoon", "spa"],
-        image: "ritz-carlton.jpg"
-    },
-    {
-        name: "Milaidhoo Island Maldives",
-        atoll: "Baa Atoll",
-        category: "5",
-        transport: "seaplane",
-        interests: ["diving", "honeymoon"],
-        image: "milaidhoo.jpg"
-    },
-    {
-        name: "Conrad Maldives Rangali Island",
-        atoll: "South Male Atoll",
-        category: "5",
-        transport: "seaplane",
-        interests: ["family", "spa"],
-        image: "conrad.jpg"
-    },
-    {
-        name: "Four Seasons Resort Maldives at Landaa Giraavaru",
-        atoll: "Baa Atoll",
-        category: "5+",
-        transport: "seaplane",
-        interests: ["diving", "spa"],
-        image: "four-seasons.jpg"
-    },
-    {
-        name: "Kuredu Island Resort & Spa",
-        atoll: "Lhaviyani Atoll",
-        category: "4",
-        transport: "speedboat",
-        interests: ["family", "diving"],
-        image: "kuredu.jpg"
-    },
-    {
-        name: "Baros Maldives",
-        atoll: "North Male Atoll",
-        category: "5",
-        transport: "speedboat",
-        interests: ["honeymoon", "spa"],
-        image: "baros.jpg"
-    }
-];
-
 // Function to display resorts
-function displayResorts(filteredResorts = resorts) {
+function displayResorts(filteredResorts) {
     const resultsContainer = document.getElementById('resort-results');
     resultsContainer.innerHTML = '';
-    
-    if (filteredResorts.length === 0) {
+
+    if (!filteredResorts || filteredResorts.length === 0) {
         resultsContainer.innerHTML = '<p class="no-results">No resorts match your filters. Please try different criteria.</p>';
         return;
     }
-    
+
     filteredResorts.forEach(resort => {
         const resortCard = document.createElement('div');
         resortCard.className = 'resort-card';
-        
-        // Format transport display text
+
         let transportText = resort.transport === 'both' ? 'Speedboat & Seaplane' : 
-                          resort.transport === 'speedboat' ? 'Speedboat' : 
-                          'Seaplane';
-        
+                            resort.transport === 'speedboat' ? 'Speedboat' : 
+                            'Seaplane';
+
         resortCard.innerHTML = `
             <div class="resort-image">
-                <img src="../imgs/resorts/${resort.image}" alt="${resort.name}">
+                <img src="${resort.image}" alt="${resort.name}">
             </div>
             <div class="resort-details">
                 <h3>${resort.name}</h3>
@@ -81,10 +28,10 @@ function displayResorts(filteredResorts = resorts) {
                     <p><strong>Transport:</strong> ${transportText}</p>
                     <p><strong>Interests:</strong> ${resort.interests.map(int => int.charAt(0).toUpperCase() + int.slice(1)).join(', ')}</p>
                 </div>
-                <button class="view-resort">View Resort</button>
+                <button id="view resort" onclick="viewResort()" class="view-resort" data-name="${resort.name}">View Resort</button>
             </div>
         `;
-        
+
         resultsContainer.appendChild(resortCard);
     });
 }
@@ -95,35 +42,43 @@ function filterResorts() {
     const transportFilter = document.getElementById('transport').value;
     const atollFilter = document.getElementById('atoll').value.toLowerCase();
     const interestFilter = document.getElementById('travel-interest').value;
-    
-    const filtered = resorts.filter(resort => {
+
+    const filtered = window.resorts.filter(resort => {
         const resortAtoll = resort.atoll.toLowerCase();
-        
-        // Check transport filter - include 'both' when either speedboat or seaplane is selected
-        const transportMatch = transportFilter === 'all' || 
-                             resort.transport === transportFilter || 
-                             (transportFilter !== 'all' && resort.transport === 'both');
-        
+        const transportMatch = transportFilter === 'all' ||
+            resort.transport === transportFilter ||
+            (transportFilter !== 'all' && resort.transport === 'both');
+
         return (categoryFilter === 'all' || resort.category === categoryFilter) &&
                transportMatch &&
                (atollFilter === 'all' || resortAtoll.includes(atollFilter)) &&
                (interestFilter === 'all' || resort.interests.includes(interestFilter));
     });
-    
+
     displayResorts(filtered);
 }
 
-// Initialize and set up event listeners
+// Load resorts when page is ready
 document.addEventListener('DOMContentLoaded', () => {
-    // Display all resorts initially
-    displayResorts();
-    
-    // Set up filter button click event
-    document.getElementById('apply-filters').addEventListener('click', filterResorts);
-    
-    // Optional: Add event listeners for instant filtering when select values change
-    const filterSelects = document.querySelectorAll('.filter-group select');
-    filterSelects.forEach(select => {
-        select.addEventListener('change', filterResorts);
-    });
+    fetch("http://skylinebackend.local/get_resorts.php") // your PHP backend URL
+        .then(response => response.json())
+        .then(data => {
+            window.resorts = data; // store globally
+            displayResorts(data);
+
+            document.getElementById('apply-filters').addEventListener('click', filterResorts);
+
+            const filterSelects = document.querySelectorAll('.filter-group select');
+            filterSelects.forEach(select => {
+                select.addEventListener('change', filterResorts);
+            });
+        })
+        .catch(err => {
+            console.error("Error loading resorts:", err);
+        });
 });
+
+
+function viewResort() {
+    
+}

@@ -22,15 +22,15 @@ const dots = document.querySelectorAll('.dot');
 const slidesInfo = [
   {
     title: "Beautiful Beaches",
-    description: "Experience the world's most pristine white sand beaches and crystal clear waters."
+    description: "The Maldives is a true paradise of picture-perfect beaches, where soft white sands meet the clear, shimmering waters of the Indian Ocean. Each island is fringed by untouched shores, offering a peaceful escape from the outside world."
   },
   {
-    title: "Adventure Tours",
-    description: "Explore exciting adventures tailored for thrill seekers."
+    title: "Honeymoons",
+    description: "Celebrate your love in one of the most romantic places on Earth. The Maldives offers an unforgettable honeymoon experience, where every moment feels like a dream."
   },
   {
     title: "Luxury Stays",
-    description: "Relax in the finest resorts with stunning ocean views."
+    description: "Experience unmatched elegance in the heart of the Indian Ocean. The Maldives is home to some of the world’s most exclusive and luxurious resorts — set on private islands, surrounded by crystal-clear lagoons and powdery white sands."
   }
 ];
 
@@ -127,7 +127,7 @@ function autoSlide() {
 }
 
 function startAutoSlide() {
-  autoSlideInterval = setInterval(autoSlide, 8000); // Match with zoom duration
+  autoSlideInterval = setInterval(autoSlide, 40000); // Match with zoom duration
 }
 
 function resetAutoSlide() {

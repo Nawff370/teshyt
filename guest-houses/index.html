@@ -1,0 +1,72 @@
+<!-- Updated guesthouses.html with styled cards -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../fonts/stylesheet.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="guesthouses.css">
+  <link rel="stylesheet" href="../similar.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skyline Maldives</title>
+  <link rel="icon" type="image/x-icon" href="../imgs/logo2-crop.png">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body oncontextmenu="return false;">
+
+  <!-- top part -->
+  <header class="top">
+    <img class="top-logo" src="../logo/logo.png" alt="image">
+    <section class="top-header-section">
+      <a href="../">Home</a>
+      <a href="../resorts-collection/">Resorts</a>
+      <a style="color: rgb(90, 182, 151);" href="">Guest Houses</a>
+      <a href="">About</a>
+      <a href="">Reach Us</a>
+    </section>
+    <section class="top-header-buttonsection">
+      <button id="booknowbutton" class="top-bookbutton">Book Now ></button>
+    </section>  
+    <section class="top-section-menu">
+      <button id="menuopenorclose" class="buttonsformenu fa-solid fa-bars" onclick="topmenufunc()"></button>
+    </section>     
+  </header>
+
+  <section id="idmenuforsmallwindow" class="menuforsmallwindow">
+    <a href="../index.html">Home</a>
+    <a href="../resorts-collection/">Resorts</a>
+    <a style="color: rgb(90, 182, 151);" href="">Guest Houses</a>
+    <a href="">About</a>
+    <a href="">Reach Us</a>
+  </section>
+ 
+  <h2 class="top-heading-gh">Guesthouses in Maldives</h2>
+  <h2 class="top-heading-gh2">Choose Your Ideal Stay</h2>
+
+  <!-- Guest Houses Display Section -->
+  <section class="guesthouse-section">
+
+    <div class="filter-dropdown">
+     <label for="ratingFilter">Filter by Rating:</label>
+     <select id="ratingFilter" onchange="filterGuesthouses(this.value)">
+      <option value="all">All Ratings</option>
+      <option value="below4">Below 4 Star</option>
+      <option value="4">4 Star</option>
+      <option value="5">5 Star</option>
+      <option value="5plus">5+ Star</option>
+     </select>
+    </div>
+
+
+
+
+
+    <div id="guesthouseContainer" class="guesthouse-container"></div>
+  </section>
+
+  <script src="guesthouses.js"></script>
+  <script src="../similar.js"></script>
+</body>
+</html>
+
