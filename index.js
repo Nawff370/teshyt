@@ -135,8 +135,11 @@ function resetAutoSlide() {
   startAutoSlide();
 }
 
+
+
 // Initialize
 window.addEventListener('load', () => {
+  goToSlide(2)
   slides[currentSlide].classList.add('active');
   startZoomAnimation(slides[currentSlide]);
   updateText(currentSlide);

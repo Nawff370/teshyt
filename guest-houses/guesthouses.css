@@ -19,9 +19,12 @@ body {
   background-position: top;
   background-repeat: no-repeat;
   background-attachment: scroll;
-  font-family: 'MythBusters', sans-serif;
+  font-family: 'Grumbear', sans-serif;
   color: rgba(0, 0, 0, 0.427);
-  
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .top-heading-gh2 {

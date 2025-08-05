@@ -224,6 +224,18 @@
   background: linear-gradient(to bottom, #52d4ab, #c6dfdc);
 }
 
+.sub-description {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #555;
+  max-width: 900px;
+  margin: 0 auto 30px auto;
+  text-align: center;
+  line-height: 1.6;
+}
+
+
 .maldives-services-images {
   display: flex;
   justify-content: center;   /* centers horizontally */
@@ -266,6 +278,11 @@
   justify-content: center;
   align-items: center;
   font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   font-family: 'Fresh Honey', sans-serif;
 }
 .text-overlay-image:hover {
@@ -279,3 +296,38 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
+.pronunciation-section {
+  display: flex;
+  flex-wrap: wrap;
+  height: max-content;
+  background-color: rgba(35, 226, 147, 0.491);
+  justify-content: center;   /* centers horizontally */
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 50px;
+  margin-bottom: 110px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.pronounces {
+  padding: 10px;
+  
+}
+
+.pronounces h4 {
+  color: black;
+  font-size: 20px;
+  margin: 5px;
+
+}
+
+.pronounces h4:nth-child(2) {
+  font-family: 'Courier New', Courier, monospace
+};
+
+
+
+
