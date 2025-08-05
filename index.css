@@ -2,6 +2,7 @@
 .slideshow-container {
   margin-top: 80px;
   position: relative;
+  padding-top: 45px;
   width: 100%;
   height: 580px;
   overflow: hidden;
@@ -26,7 +27,6 @@
   z-index: 10;
   filter: brightness(1);
   animation: slowZoom 20s ease-in-out forwards;
-  animation: slowZoom 20s ease-in-out backwards;
 }
 
 /* Enhanced Zoom Animation */
@@ -213,6 +213,56 @@
   background-color: rgba(255, 255, 255, 0.8);
 }
 
+/* Slide transition animation */
+.slide.slide-in-left {
+  animation: slideInFromLeft 0.5s ease forwards;
+  z-index: 11;
+}
+.slide.slide-in-right {
+  animation: slideInFromRight 0.5s ease forwards;
+  z-index: 11;
+}
+.slide.slide-out-left {
+  animation: slideOutToLeft 0.5s ease forwards;
+  z-index: 9;
+}
+.slide.slide-out-right {
+  animation: slideOutToRight 0.5s ease forwards;
+  z-index: 9;
+}
+
+@keyframes slideInFromLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideInFromRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideOutToLeft {
+  from { transform: translateX(0); opacity: 1; }
+  to   { transform: translateX(-100%); opacity: 0; }
+}
+@keyframes slideOutToRight {
+  from { transform: translateX(0); opacity: 1; }
+  to   { transform: translateX(100%); opacity: 0; }
+}
+
+.animate-text {
+  animation: slideTextDown 1s ease-in-out;
+}
+
+@keyframes slideTextDown {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
 .main-sub-headings {
   width: 100%;
   margin-top: 90px;
@@ -222,6 +272,11 @@
   font-size: 50px;
   font-family: 'Grumbear', sans-serif;
   background: linear-gradient(to bottom, #52d4ab, #c6dfdc);
+}
+
+.margin-class {
+  margin-left: 17px;
+  margin-right: 17px;
 }
 
 .sub-description {

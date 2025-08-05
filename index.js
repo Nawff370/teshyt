@@ -1,5 +1,3 @@
-
-
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 const buttons = document.querySelectorAll('.prev, .next');
@@ -15,14 +13,13 @@ slides.forEach((_, index) => {
   dot.addEventListener('click', () => goToSlide(index));
   dotsContainer.appendChild(dot);
 });
-
 document.querySelector('.slideshow-container').appendChild(dotsContainer);
 const dots = document.querySelectorAll('.dot');
 
 const slidesInfo = [
   {
     title: "Beautiful Beaches",
-    description: "The Maldives is a true paradise of picture-perfect beaches, where soft white sands meet the clear, shimmering waters of the Indian Ocean. Each island is fringed by untouched shores, offering a peaceful escape from the outside world."
+    description: "Celebrate your love in one of the most romantic places on Earth. The Maldives offers an unforgettable honeymoon experience, where every moment feels like a dream."
   },
   {
     title: "Honeymoons",
@@ -36,11 +33,16 @@ const slidesInfo = [
 
 const titleEl = document.getElementById('slide-title');
 const descEl = document.getElementById('slide-desc');
+const textOverlay = document.querySelector('.text-overlay');
 
 let autoSlideInterval;
 let isAnimating = false;
 
 function updateText(index) {
+  textOverlay.classList.remove('animate-text');
+  void textOverlay.offsetWidth; // force reflow
+  textOverlay.classList.add('animate-text');
+
   titleEl.textContent = slidesInfo[index].title;
   descEl.textContent = slidesInfo[index].description;
 }
@@ -52,51 +54,37 @@ function updateDots(index) {
 }
 
 function startZoomAnimation(slide) {
-  // Reset any existing animation
   slide.style.animation = 'none';
-  void slide.offsetHeight; // Trigger reflow
-  
-  // Start new zoom animation
-  slide.style.animation = 'slowZoom 15s ease-in-out forwards';
+  void slide.offsetHeight;
+  slide.style.animation = 'slowZoom 20s ease-in-out forwards';
 }
-
-startZoomAnimation(1)
 
 function animateSlideTransition(newIndex) {
   if (isAnimating) return;
   isAnimating = true;
-  
-  // Fade overlay effect
+
   overlay.style.opacity = '0.3';
-  
-  // Disable buttons during transition
   buttons.forEach(btn => {
     btn.style.pointerEvents = 'none';
     btn.style.opacity = '0.5';
   });
-  
-  // Get current and next slides
+
   const currentActiveSlide = slides[currentSlide];
   const nextSlide = slides[newIndex];
-  
-  // Add fade-out class to current slide
+
   currentActiveSlide.classList.add('fade-out');
-  
+
   setTimeout(() => {
-    // Remove classes from current slide
     currentActiveSlide.classList.remove('active', 'fade-out');
     currentActiveSlide.style.animation = 'none';
-    
-    // Add active class to new slide
+
     nextSlide.classList.add('active');
     startZoomAnimation(nextSlide);
-    
-    // Update current slide
+
     currentSlide = newIndex;
     updateText(currentSlide);
     updateDots(currentSlide);
-    
-    // Re-enable buttons
+
     setTimeout(() => {
       buttons.forEach(btn => {
         btn.style.pointerEvents = 'auto';
@@ -108,26 +96,28 @@ function animateSlideTransition(newIndex) {
   }, 500);
 }
 
-function goToSlide(index) {
-  if (index === currentSlide) return;
+function goToSlide(index, fromAuto = false) {
+  if (index === currentSlide && !fromAuto) return;
   animateSlideTransition(index);
-  resetAutoSlide();
+  if (!fromAuto) resetAutoSlide();
 }
 
 function changeSlide(direction) {
   let newIndex = currentSlide + direction;
   if (newIndex < 0) newIndex = slides.length - 1;
   else if (newIndex >= slides.length) newIndex = 0;
-  
+
   goToSlide(newIndex);
 }
 
 function autoSlide() {
-  changeSlide(1);
+  let newIndex = currentSlide + 1;
+  if (newIndex >= slides.length) newIndex = 0;
+  goToSlide(newIndex, true);
 }
 
 function startAutoSlide() {
-  autoSlideInterval = setInterval(autoSlide, 40000); // Match with zoom duration
+  autoSlideInterval = setInterval(autoSlide, 20000);
 }
 
 function resetAutoSlide() {
@@ -135,28 +125,31 @@ function resetAutoSlide() {
   startAutoSlide();
 }
 
-
-
-// Initialize
 window.addEventListener('load', () => {
-  goToSlide(2)
   slides[currentSlide].classList.add('active');
   startZoomAnimation(slides[currentSlide]);
   updateText(currentSlide);
   updateDots(currentSlide);
   startAutoSlide();
-  
-  // Add hover effect to pause auto-slide
-  const container = document.querySelector('.slideshow-container');
-  container.addEventListener('mouseenter', () => {
-    clearInterval(autoSlideInterval);
-    // Pause the zoom animation
-    slides[currentSlide].style.animationPlayState = 'paused';
-  });
-  
-  container.addEventListener('mouseleave', () => {
-    resetAutoSlide();
-    // Resume the zoom animation
-    slides[currentSlide].style.animationPlayState = 'running';
-  });
 });
+
+// Swipe gestures
+let touchStartX = 0;
+let touchEndX = 0;
+const sliderContainer = document.querySelector('.slideshow-container');
+
+sliderContainer.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+sliderContainer.addEventListener('touchend', e => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleGesture();
+});
+
+function handleGesture() {
+  const swipeDistance = touchEndX - touchStartX;
+  if (Math.abs(swipeDistance) < 50) return;
+  if (swipeDistance < 0) changeSlide(1); // Swipe left → next
+  else changeSlide(-1); // Swipe right → prev
+}
