@@ -35,10 +35,19 @@ const titleEl = document.getElementById('slide-title');
 const descEl = document.getElementById('slide-desc');
 const textOverlay = document.querySelector('.text-overlay');
 
+// Create swipe feedback elements dynamically
+const swipeLeftGlow = document.createElement('div');
+swipeLeftGlow.className = 'swipe-feedback swipe-left';
+const swipeRightGlow = document.createElement('div');
+swipeRightGlow.className = 'swipe-feedback swipe-right';
+document.querySelector('.slideshow-container').appendChild(swipeLeftGlow);
+document.querySelector('.slideshow-container').appendChild(swipeRightGlow);
+
 let autoSlideInterval;
 let isAnimating = false;
 
 function updateText(index) {
+  // Smooth animation for text
   textOverlay.classList.remove('animate-text');
   void textOverlay.offsetWidth; // force reflow
   textOverlay.classList.add('animate-text');
@@ -53,13 +62,23 @@ function updateDots(index) {
   });
 }
 
+function clearSlideClasses(slide) {
+  slide.classList.remove(
+    'active',
+    'slide-in-left',
+    'slide-out-left',
+    'slide-in-right',
+    'slide-out-right'
+  );
+}
+
 function startZoomAnimation(slide) {
   slide.style.animation = 'none';
   void slide.offsetHeight;
   slide.style.animation = 'slowZoom 20s ease-in-out forwards';
 }
 
-function animateSlideTransition(newIndex) {
+function animateSlideTransition(newIndex, direction) {
   if (isAnimating) return;
   isAnimating = true;
 
@@ -69,51 +88,70 @@ function animateSlideTransition(newIndex) {
     btn.style.opacity = '0.5';
   });
 
-  const currentActiveSlide = slides[currentSlide];
-  const nextSlide = slides[newIndex];
+  const currentSlideEl = slides[currentSlide];
+  const nextSlideEl = slides[newIndex];
 
-  currentActiveSlide.classList.add('fade-out');
+  clearSlideClasses(currentSlideEl);
+  clearSlideClasses(nextSlideEl);
 
+  if (direction === 'left') {
+    // slide left: current slide out left, next slide in from right
+    nextSlideEl.classList.add('slide-in-right', 'active');
+    currentSlideEl.classList.add('slide-out-left');
+  } else {
+    // slide right: current slide out right, next slide in from left
+    nextSlideEl.classList.add('slide-in-left', 'active');
+    currentSlideEl.classList.add('slide-out-right');
+  }
+
+  // Update text and dots immediately
+  updateText(newIndex);
+  updateDots(newIndex);
+  startZoomAnimation(nextSlideEl);
+
+  // After animation ends (500ms)
   setTimeout(() => {
-    currentActiveSlide.classList.remove('active', 'fade-out');
-    currentActiveSlide.style.animation = 'none';
-
-    nextSlide.classList.add('active');
-    startZoomAnimation(nextSlide);
+    clearSlideClasses(currentSlideEl);
+    currentSlideEl.classList.remove('active');
+    nextSlideEl.classList.remove('slide-in-left', 'slide-in-right');
+    
+    overlay.style.opacity = '0';
+    buttons.forEach(btn => {
+      btn.style.pointerEvents = 'auto';
+      btn.style.opacity = '1';
+    });
 
     currentSlide = newIndex;
-    updateText(currentSlide);
-    updateDots(currentSlide);
-
-    setTimeout(() => {
-      buttons.forEach(btn => {
-        btn.style.pointerEvents = 'auto';
-        btn.style.opacity = '1';
-      });
-      overlay.style.opacity = '0';
-      isAnimating = false;
-    }, 300);
+    isAnimating = false;
   }, 500);
 }
 
-function goToSlide(index, fromAuto = false) {
+function goToSlide(index, fromAuto = false, direction = 'left') {
   if (index === currentSlide && !fromAuto) return;
-  animateSlideTransition(index);
-  if (!fromAuto) resetAutoSlide();
+  animateSlideTransition(index, direction);
+  resetAutoSlide();
 }
 
 function changeSlide(direction) {
   let newIndex = currentSlide + direction;
   if (newIndex < 0) newIndex = slides.length - 1;
   else if (newIndex >= slides.length) newIndex = 0;
+  goToSlide(newIndex, false, direction === 1 ? 'left' : 'right');
+}
 
-  goToSlide(newIndex);
+// Swipe feedback animation trigger
+function triggerSwipeEffect(direction) {
+  const feedback = direction === 'left' ? swipeRightGlow : swipeLeftGlow;
+  feedback.classList.add('show');
+  setTimeout(() => {
+    feedback.classList.remove('show');
+  }, 700);
 }
 
 function autoSlide() {
   let newIndex = currentSlide + 1;
   if (newIndex >= slides.length) newIndex = 0;
-  goToSlide(newIndex, true);
+  goToSlide(newIndex, true, 'left');
 }
 
 function startAutoSlide() {
@@ -126,6 +164,9 @@ function resetAutoSlide() {
 }
 
 window.addEventListener('load', () => {
+  slides.forEach(slide => {
+    slide.classList.remove('active', 'slide-in-left', 'slide-in-right', 'slide-out-left', 'slide-out-right');
+  });
   slides[currentSlide].classList.add('active');
   startZoomAnimation(slides[currentSlide]);
   updateText(currentSlide);
@@ -133,7 +174,7 @@ window.addEventListener('load', () => {
   startAutoSlide();
 });
 
-// Swipe gestures
+// Swipe support
 let touchStartX = 0;
 let touchEndX = 0;
 const sliderContainer = document.querySelector('.slideshow-container');
@@ -150,6 +191,14 @@ sliderContainer.addEventListener('touchend', e => {
 function handleGesture() {
   const swipeDistance = touchEndX - touchStartX;
   if (Math.abs(swipeDistance) < 50) return;
-  if (swipeDistance < 0) changeSlide(1); // Swipe left → next
-  else changeSlide(-1); // Swipe right → prev
+
+  if (swipeDistance < 0) {
+    // Swiped left → next slide, show glow on right side
+    triggerSwipeEffect('left');
+    changeSlide(1);
+  } else {
+    // Swiped right → previous slide, show glow on left side
+    triggerSwipeEffect('right');
+    changeSlide(-1);
+  }
 }

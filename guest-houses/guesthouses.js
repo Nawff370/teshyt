@@ -1,46 +1,4 @@
-const guesthouses = [
-  {
-    name: "Hevana Guesthouse",
-    island: "Keyodhoo",
-    default_price: 300,
-    rating: 4.8,
-    pricing_table: "",
-    image: "https://photos.maldivesholidayoffers.com/hotel_rooms/f4e9a75ccf211efe8f0cebecda1ebea0-org.jpg"
-  },
-  {
-    name: "Ocean Breeze Stay",
-    island: "Maafushi",
-    default_price: 85,
-    rating: 4.3,
-    pricing_table: "",
-    image: "https://photos.maldivesholidayoffers.com/hotel_rooms/f4e9a75ccf211efe8f0cebecda1ebea0-org.jpg"
-  },
-  {
-    name: "Palm Tree Inn",
-    island: "Thoddoo",
-    default_price: 40,
-    rating: 4.1,
-    pricing_table: "",
-    image: "https://photos.maldivesholidayoffers.com/hotel_rooms/f4e9a75ccf211efe8f0cebecda1ebea0-org.jpg"
-  },
-  {
-    name: "Blue Sky Retreat",
-    island: "Ukulhas",
-    default_price: 70,
-    rating: 4.5,
-    pricing_table: "",
-    image: "https://photos.maldivesholidayoffers.com/hotel_rooms/f4e9a75ccf211efe8f0cebecda1ebea0-org.jpg"
-  },
-  {
-    name: "Sunset Bay Lodge",
-    island: "Dhigurah",
-    default_price: 250,
-    rating: 5.6,
-    pricing_table: "",
-    image: "https://photos.maldivesholidayoffers.com/hotel_rooms/f4e9a75ccf211efe8f0cebecda1ebea0-org.jpg"
-  }
-];
-
+let guesthouses = []; // to hold backend data
 
 function getRoundedStar(rating) {
   if (rating > 5) return '5plus';
@@ -61,12 +19,21 @@ function displayGuesthouses(filter = 'all') {
       const card = document.createElement("div");
       card.className = "guesthouse-card";
 
+      // Format pricing nicely if exists
+      let pricingHTML = "";
+      if (gh.pricing && typeof gh.pricing === "object") {
+        pricingHTML = "<ul>";
+        for (const key in gh.pricing) {
+          pricingHTML += `<li><strong>${key}:</strong> ${gh.pricing[key]}</li>`;
+        }
+        pricingHTML += "</ul>";
+      }
+
       card.innerHTML = `
         <img src="${gh.image}" alt="${gh.name}" class="guesthouse-img">
         <div class="guesthouse-info">
           <h3>${gh.name}</h3>
           <p><strong>Island:</strong> ${gh.island}</p>
-          <p><strong>Price:</strong> $${gh.default_price}/night</p>
           <p><strong>Rating:</strong> ⭐ ${gh.rating}</p>
         </div>
       `;
@@ -80,5 +47,35 @@ function filterGuesthouses(ratingCategory) {
   displayGuesthouses(ratingCategory);
 }
 
+async function loadGuesthouses() {
+  try {
+    const response = await fetch('http://skylinebackend.local/get_guesthouses.php'); // Change to your actual URL
+    if (!response.ok) throw new Error('Failed to fetch guesthouses');
 
-window.onload = () => displayGuesthouses();
+    const data = await response.json();
+
+    // Backend sends maxAandC but your frontend uses maxAdultsAndChildren
+    guesthouses = data.map(gh => ({
+      ...gh,
+      maxAdultsAndChildren: gh.maxAdultsAndChildren || gh.maxAandC || gh.maxAdultsAndChildren, // fallback
+      rating: parseFloat(gh.rating) || 0,
+      maxinfants: gh.maxinfants || 0,
+      maxpets: gh.maxpets || 0,
+      pricing: gh.pricing || {}
+    }));
+
+    displayGuesthouses();
+  } catch (error) {
+    console.error('Error loading guesthouses:', error);
+  }
+}
+
+window.onload = () => {
+  loadGuesthouses();
+
+  // attach filter onchange listener (in case your HTML dynamically added)
+  const filterSelect = document.getElementById('ratingFilter');
+  if (filterSelect) {
+    filterSelect.addEventListener('change', e => filterGuesthouses(e.target.value));
+  }
+};
