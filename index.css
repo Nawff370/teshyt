@@ -374,6 +374,10 @@
   color: rgba(254, 254, 254, 0.995);
   transition: scale 0.3s ease-in-out;
   font-family: 'MythBusters', sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .simage:hover {
@@ -472,6 +476,10 @@
   color: rgba(254, 254, 254, 0.995);
   transition: scale 0.3s ease-in-out;
   font-family: 'MythBusters', sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .aimage:hover {
@@ -519,6 +527,10 @@
 .text-overlay-33 {
   font-size: 16px;
   color: rgba(0, 0, 0, 0.47);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .button-discover {
@@ -528,6 +540,10 @@
   border: none;
   border-radius: 5px;
   transition: scale ease-in-out 0.2s;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .button-discover:hover {
