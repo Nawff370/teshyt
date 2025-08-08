@@ -17,10 +17,7 @@ function displayResorts(filteredResorts) {
                             'Seaplane';
 
         resortCard.innerHTML = `
-            <div class="resort-image">
-                <img src="${resort.image}" alt="${resort.name}">
-            </div>
-            <div class="resort-details">
+            <div style="background-image: url(${resort.image});" class="resort-details">
                 <h3>${resort.name}</h3>
                 <div class="resort-info">
                     <p><strong>Atoll:</strong> ${resort.atoll}</p>
@@ -28,11 +25,16 @@ function displayResorts(filteredResorts) {
                     <p><strong>Transport:</strong> ${transportText}</p>
                     <p><strong>Interests:</strong> ${resort.interests.map(int => int.charAt(0).toUpperCase() + int.slice(1)).join(', ')}</p>
                 </div>
-                <button id="view resort" onclick="viewResort()" class="view-resort" data-name="${resort.name}">View Resort</button>
             </div>
         `;
 
         resultsContainer.appendChild(resortCard);
+
+        resortCard.addEventListener('click', () => {
+         const resortSlug = resort.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+         location.href = `resort.php?slug=${resortSlug}`;
+        });
+
     });
 }
 
@@ -78,7 +80,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
+fetch('http://skylinebackend.local/get_resorts.php') // Change this to your actual PHP API endpoint
+  .then(response => response.json())
+  .then(data => {
+    const atollSelect = document.getElementById('atoll');
+    const atollSet = new Set();
 
-function viewResort() {
-    
-}
+    data.forEach(resort => {
+      if (resort.atoll) {
+        atollSet.add(resort.atoll);
+      }
+    });
+
+    // Convert to sorted array
+    const sortedAtolls = [...atollSet].sort();
+
+    sortedAtolls.forEach(atoll => {
+      const option = document.createElement('option');
+      option.value = atoll.toLowerCase();
+      option.textContent = atoll;
+      atollSelect.appendChild(option);
+    });
+  })
+  .catch(error => console.error('Error loading data:', error));
+
+
+

@@ -38,4 +38,10 @@ function checkWindowSize() {
 
 window.addEventListener('resize', checkWindowSize);
 
+window.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+      img.loading = "eager";
+    });
+});
+
 
